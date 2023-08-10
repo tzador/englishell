@@ -28,10 +28,10 @@ hello world
 ```
 
 ```shell
-$ npx englishell print hello world
-echo "hello world"
+$ npx englishell print the size in megabytes of the current directory
+du -sh .
 # Hit Enter to execute, Ctrl-C to cancel.
-hello world
+1.8M   .
 ```
 
 ## Install
