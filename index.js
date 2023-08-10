@@ -29,14 +29,19 @@ const openai = new OpenAIApi(configuration);
 
 async function main() {
   const response = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
+    temperature: 0,
+    top_p: 0.1,
     messages: [
       {
         role: "system",
         content: `
-I want you to act as a translator from plain human language, to shell commands.
-I will provide you with plain text phrases, and you will provide me with the shell commands that I should run.
-Output the resulting shell command and nothing else, no text before or after the command, just the command.
+I want you to act as a translator from plain english, to linux/mac shell commands.
+I will provide you with plain english instruction,
+and you will answer with the shell commands that I could run on the terminal.
+Output the resulting shell command and nothing else,
+no text before or after the command,
+just the command itself.
       `.trim()
       },
       {
@@ -47,7 +52,11 @@ Output the resulting shell command and nothing else, no text before or after the
   });
   const result = (response.data.choices[0].message?.content ?? "").trim();
 
-  readline.question(result, () => {
+  const yellow = `\x1b[33m${result}\x1b[0m`;
+  const hint = `# Hit Enter to execute, Ctrl-C to cancel.`;
+  const blue = `\x1b[34m${hint}\x1b[0m`;
+
+  readline.question(yellow + "\n" + blue, () => {
     readline.close();
 
     exec(result, (error, stdout, stderr) => {
