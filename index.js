@@ -29,7 +29,7 @@ const openai = new OpenAIApi(configuration);
 
 async function main() {
   const response = await openai.createChatCompletion({
-    model: "gpt-4",
+    model: "gpt-3.5-turbo",
     temperature: 0,
     top_p: 0.1,
     messages: [
