@@ -6,7 +6,17 @@
     "englishell": "./index.js",
     "e2s": "./index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "chatgpt",
+    "terminal",
+    "shell",
+    "openai",
+    "englishell"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tzador/englishell"
+  },
   "author": "",
   "license": "MIT",
   "dependencies": {
