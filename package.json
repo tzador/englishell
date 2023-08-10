@@ -1,0 +1,15 @@
+{
+  "name": "englishell",
+  "version": "1.0.0",
+  "description": "Translate plain english commands to shell commands and execute",
+  "bin": {
+    "englishell": "./index.js",
+    "e2s": "./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "openai": "^3.3.0"
+  }
+}
