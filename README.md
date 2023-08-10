@@ -1,6 +1,6 @@
 # englishell
 
-Execute shell commands by providing english instructions.
+Execute shell commands by providing english instructions, powered by ChatGPT.
 
 **Warning**: Review the suggested commands before executing them.
 
