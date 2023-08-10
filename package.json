@@ -1,6 +1,6 @@
 {
   "name": "englishell",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Translate plain english commands to shell commands and execute",
   "bin": {
     "englishell": "./index.js",
