@@ -18,6 +18,9 @@ Use tilda '~' to represent the home directory.
 Output the resulting shell command and nothing else,
 no text before or after the command,
 just the command itself.
+Do not wrap the command in code block, single or double quotes, or other formatting.
+Output the command as if it was typed directly on the terminal.
+Output the command as plain text.
 `.trim();
 
 const EXPLAIN = `
