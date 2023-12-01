@@ -34,18 +34,23 @@ rm ~/.englishell.sh
 
 printf "\n"
 echo "$COMMAND"
+
 printf "\n"
 printf "$GREY"
-printf "# Hit [Enter] to execute the above command, [Ctrl+C] to abort, or ?/help to show explanation: "
+printf "# [Enter]       - to execute the above command\n"
+printf "# [Ctrl+C]      - to abort\n"
+printf "# \"?\" or \"help\" - to show explanation\n"
+printf ">>> "
 printf "$NC"
+
 read -p "" user_input
+printf "\n"
 
 if [[ -z "$user_input" ]]; then
   eval "$COMMAND"
 else
   COMMAND=$COMMAND englishell-js -e $* > ~/.englishell.txt &
 
-  printf "\n"
   printf "$GREY"
   printf "Explaining shell command "
   loading $!
@@ -58,11 +63,13 @@ else
   echo "$EXPLANATION"
 
   printf "\n"
-
   printf "$GREY"
-  printf "# Hit [Enter] to execute the above command, [Ctrl+C] to abort: "
+  printf "# [Enter]       - to execute the above command\n"
+  printf "# [Ctrl+C]      - to abort\n"
+  printf ">>> "
   printf "$NC"
 
   read -p "" user_input2
+  printf "\n"
   eval "$COMMAND"
 fi
