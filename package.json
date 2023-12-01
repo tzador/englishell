@@ -1,6 +1,6 @@
 {
   "name": "englishell",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "bin": {
     "englishell": "./scripts/englishell.sh",
     "englishell-js": "./scripts/englishell.js"
