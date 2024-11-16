@@ -29,7 +29,7 @@ Do not output anything neither before nor after the explanation.
 `.trim();
 
 export async function translate(instructions: string): Promise<string> {
-  const response = await openai.createChatCompletion({
+  const response = await openai.chat.completions.create({
     model,
     temperature,
     top_p,
@@ -38,11 +38,11 @@ export async function translate(instructions: string): Promise<string> {
       { role: "user", content: instructions },
     ],
   });
-  return (response.data.choices[0].message?.content ?? "").trim();
+  return (response.choices[0].message?.content ?? "").trim();
 }
 
 export async function explain(instructions: string, command: string): Promise<string> {
-  const response = await openai.createChatCompletion({
+  const response = await openai.chat.completions.create({
     model,
     temperature,
     top_p,
@@ -53,5 +53,5 @@ export async function explain(instructions: string, command: string): Promise<st
       { role: "user", content: EXPLAIN },
     ],
   });
-  return (response.data.choices[0].message?.content ?? "").trim();
+  return (response.choices[0].message?.content ?? "").trim();
 }
