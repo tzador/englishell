@@ -1,0 +1,26 @@
+{
+  "name": "englishell",
+  "version": "3.0.0",
+  "description": "Translate English instructions to shell commands using OpenAI",
+  "bin": {
+    "englishell": "./bin/englishell",
+    "e": "./bin/englishell"
+  },
+  "keywords": [
+    "cli",
+    "shell",
+    "terminal",
+    "command-line",
+    "natural-language",
+    "openai",
+    "ai",
+    "gpt",
+    "translation",
+    "automation"
+  ],
+  "author": "Tim Zadorozhny <tzador@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "openai": "^4.72.0"
+  }
+}

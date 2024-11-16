@@ -1,0 +1,130 @@
+#!/usr/bin/env node
+const { OpenAI } = require("openai");
+const readline = require("readline");
+const { spawn } = require("child_process");
+
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+
+const PLATFORM =
+  process.platform === "darwin"
+    ? "mac"
+    : process.platform === "linux"
+    ? "linux"
+    : "other";
+
+if (!OPENAI_API_KEY) {
+  console.error("Please set the OPENAI_API_KEY environment variable.");
+  process.exit(1);
+}
+
+if (PLATFORM === "other") {
+  console.error("Unsupported platform: " + PLATFORM);
+  process.exit(1);
+}
+
+function help() {
+  console.log("TODO: help");
+}
+
+const instructions = process.argv.slice(2).join(" ").trim();
+
+if (!instructions) {
+  help();
+  process.exit(0);
+}
+
+const openai = new OpenAI();
+
+const systemPrompt = `
+You are a command-line shell terminal intelligent assistant for ${PLATFORM}.
+I will give you instructions and you will report a shell command to be executed on a terminal,
+along with detailed explanation of what the command does.
+Report the generated shell command and its explanation,
+by calling the provided report_shell_command(command, explanation) function.
+`;
+
+const colors = {
+  bold: "\x1b[1m",
+  gray: "\x1b[90m",
+  blue: "\x1b[34m",
+  reset: "\x1b[0m"
+};
+
+async function main() {
+  const completion = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: instructions }
+    ],
+    functions: [
+      {
+        name: "report_shell_command",
+        description:
+          "Report the shell command to be executed and its explanation",
+        parameters: {
+          type: "object",
+          properties: {
+            command: {
+              type: "string",
+              description: "The shell command to be executed"
+            },
+            explanation: {
+              type: "string",
+              description: "Detailed explanation of what the command does"
+            }
+          },
+          required: ["command", "explanation"]
+        }
+      }
+    ],
+    function_call: { name: "report_shell_command" }
+  });
+
+  const response = completion.choices[0].message;
+
+  if (response.function_call) {
+    const args = JSON.parse(response.function_call.arguments);
+    console.log(colors.blue + "$" + ` ${args.command}` + colors.reset);
+    console.log();
+    console.log(colors.gray + args.explanation + colors.reset);
+    console.log();
+
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    const r = await new Promise((resolve) => {
+      rl.question("Press Enter to execute the command: ", (answer) => {
+        rl.close();
+        resolve(answer);
+      });
+    });
+
+    if (r === "") {
+      console.log(`Executing: ${args.command}`);
+
+      const child = spawn(process.env.SHELL, ["-c", args.command], {
+        stdio: "inherit" // This automatically pipes stdin, stdout, and stderr
+      });
+
+      await new Promise((resolve, reject) => {
+        child.on("exit", (code) => {
+          if (code === 0) {
+            resolve();
+          } else {
+            reject(new Error(`Command failed with exit code ${code}`));
+          }
+        });
+        child.on("error", reject);
+      });
+    } else {
+      console.log("TODO: Process follow up instruction");
+    }
+  } else {
+    console.log(response);
+  }
+}
+
+main().catch(console.error);

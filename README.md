@@ -1,88 +1,100 @@
 # englishell
 
-Execute shell commands by providing human readable (free text) instructions, in plain english.
+A command-line tool that translates English instructions into shell commands using OpenAI's GPT-3.5, making terminal operations more intuitive and accessible.
 
-Powered by ChatGPT.
+## Features
 
-**Warning**: Review the suggested commands before executing them.
+- Translates natural language to shell commands
+- Works on macOS and Linux
+- Provides detailed explanations for each command
+- Requires confirmation before execution
+- Available as both `englishell` and `e` commands for convenience
 
-## Try it out
+## Installation
 
-```shell
-$ npx englishell print hello world
-# Suggests:
-echo "hello world"
+```bash
+npm install -g englishell
 ```
 
-```shell
-$ npx englishell print the size in megabytes of the current directory
-# Suggests:
-du -sh .
+## Prerequisites
+
+You need to have an OpenAI API key set in your environment variables:
+
+```bash
+export OPENAI_API_KEY='your-api-key-here'
 ```
 
-## Install
+## Usage
 
-Install globally using npm:
+Simply type your instruction in plain English after the command:
 
-```shell
-$ npm i -g englishell
+```bash
+englishell [your instruction]
+# or use the short form
+e [your instruction]
 ```
 
-Now you can use it using global shell command `englishell`:
+### Examples
 
-```shell
-$ englishell show current time, without date
-# Suggests:
-date +"%T"
+1. **Finding large files**
+
+```bash
+$ englishell find all files larger than 100MB in my home directory
+
+$ find ~/ -type f -size +100M
+
+This command searches your home directory (~/) for files (-type f) that are larger
+than 100 megabytes (-size +100M). The results will show the full path to each file
+that matches these criteria.
 ```
 
-```shell
-$ englishell what year is it
-# Suggests:
-date +%Y
+2. **Process management**
+
+```bash
+$ englishell show me all running node processes
+
+$ ps aux | grep node
+
+This command lists all running processes (ps aux) and filters the results to show
+only those containing "node" in their description. The output will show the process
+ID, CPU usage, memory usage, and other details for each Node.js process.
 ```
 
+3. **System information**
 
-## More Examples
+```bash
+$ englishell show system memory usage
 
-```shell
-$ englishell kill the process that listens to port 8080
-# Suggests:
-lsof -i :8080 | awk '{print $2}' | tail -n 1 | xargs kill -9
+$ free -h
+
+This command displays the system's memory usage in a human-readable format (-h).
+It shows total memory, used memory, free memory, shared memory, and available memory,
+as well as swap usage statistics.
 ```
 
-```shell
-$ englishell generate a loud sound
-# Suggests:
-afplay /System/Library/Sounds/Basso.aiff
-```
+## How It Works
 
-```shell
-$ englishell generate a beep sound
-# Suggests:
-echo -e "\a"
-```
+1. Your English instruction is sent to OpenAI's GPT-3.5 model
+2. The AI generates an appropriate shell command and explanation
+3. The command and explanation are displayed for your review
+4. You can press Enter to execute the command or input a follow-up instruction
+5. The command is executed in your default shell
 
-```shell
-$ englishell print current git branch
-# Suggests:
-git branch --show-current
-```
+## Supported Platforms
 
-```shell
-$ englishell show the sizes of all folders in parent of the current directory
-# Suggests:
-du -sh ../*
-```
+- macOS
+- Linux
 
-```shell
-$ englishell how long the system has been running
-# Suggests:
-uptime
-```
+## Security
 
-```shell
-$ englishell generate strong password
-# Suggests:
-openssl rand -base64 14
-```
+- All commands are shown before execution
+- Requires explicit confirmation (Enter key) before running any command
+- You can review the explanation and command before execution
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+[Add your chosen license here]
