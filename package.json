@@ -36,7 +36,7 @@
     "@vercel/analytics": "^1.0.1",
     "ai": "^2.1.32",
     "node-fetch": "^3.3.2",
-    "openai": "^3.3.0",
+    "openai": "^4.72.0",
     "papercss": "^1.9.2",
     "spaper": "^1.1.1"
   }
