@@ -1,8 +1,7 @@
 import { OPENAI_API_KEY } from "$env/static/private";
-import { Configuration, OpenAIApi } from "openai";
+import OpenAI from "openai";
 
-const configuration = new Configuration({ apiKey: OPENAI_API_KEY });
-const openai = new OpenAIApi(configuration);
+const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 const model = "gpt-4o";
 const temperature = 0.1;
