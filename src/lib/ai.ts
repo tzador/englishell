@@ -4,9 +4,9 @@ import { Configuration, OpenAIApi } from "openai";
 const configuration = new Configuration({ apiKey: OPENAI_API_KEY });
 const openai = new OpenAIApi(configuration);
 
-const model = "gpt-3.5-turbo";
-const temperature = 0;
-const top_p = 0;
+const model = "gpt-4o";
+const temperature = 0.1;
+const top_p = 0.9;
 
 const SYSTEM = `
 I want you to act as a translator from plain human language, to linux/mac shell commands.
