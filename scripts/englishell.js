@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import fetch from "node-fetch";
 
-// const api = "https://englishell.pages.dev/";
-const api = "http://localhost:5173";
+const api = "https://englishell.pages.dev";
 
 const mode = process.argv[2];
 const instructions = process.argv.slice(3).join(" ");
