@@ -1,6 +1,6 @@
 {
   "name": "englishell",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Translate English instructions to shell commands using OpenAI",
   "bin": {
     "englishell": "./bin/englishell",
