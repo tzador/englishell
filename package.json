@@ -1,6 +1,6 @@
 {
   "name": "englishell",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Translate English instructions to shell commands using OpenAI",
   "bin": {
     "englishell": "./bin/englishell",
@@ -20,6 +20,10 @@
   ],
   "author": "Tim Zadorozhny <tzador@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tzador/englishell.git"
+  },
   "dependencies": {
     "openai": "^4.72.0"
   }
